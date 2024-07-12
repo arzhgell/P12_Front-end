@@ -1,0 +1,46 @@
+{
+	"compilerOptions": {
+		"types": ["node"],
+		"baseUrl": "./",
+		"paths": {
+			"@components/*": ["src/components/*"],
+			"@config/*": ["src/config/*"],
+			"@constants/*": ["src/constants/*"],
+			"@containers/*": ["src/containers/*"],
+			"@hooks/*": ["src/hooks/*"],
+			"@navigation/*": ["src/navigation/*"],
+			"@tools/*": ["src/tools/*"],
+			"@/types/*": ["src/types/*"],
+			"@assets/*": ["src/assets/*"]
+		},
+		"outDir": "build/dist",
+		"module": "esnext",
+		"target": "es5",
+		"downlevelIteration": true,
+		"lib": ["es6", "dom", "ES2021.String"],
+		"sourceMap": true,
+		"allowJs": true,
+		"jsx": "react",
+		"moduleResolution": "node",
+		"rootDir": "./",
+		"forceConsistentCasingInFileNames": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"noImplicitAny": true,
+		"importHelpers": true,
+		"strictNullChecks": true,
+		"noUnusedLocals": false,
+		"resolveJsonModule": true,
+		"allowSyntheticDefaultImports": true,
+		"declaration": true
+	},
+	"include": ["src", "src/config/declaration.d.ts", "tailwind.config.js"],
+	"exclude": [
+		"node_modules",
+		"build",
+		"scripts",
+		"acceptance-tests",
+		"jest",
+		"src/setupTests.ts"
+	]
+}
