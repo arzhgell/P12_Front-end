@@ -1,8 +1,10 @@
-import { Home } from "./containers/Home";
 import React, { createContext } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Home } from "./containers/Home";
 
-type GlobalContextType = {};
+export type GlobalContextType = {
+	user?: string;
+};
 
 export const GlobalContext = createContext<GlobalContextType>({});
 
