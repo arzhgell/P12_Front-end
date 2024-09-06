@@ -1,23 +1,51 @@
-import { ErrorMessage, Field } from "formik";
 import React from "react";
 
-export function Select({
+interface SelectProps {
+	label: string;
+	name: string;
+	options: string[];
+	value: string;
+	onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+	className?: string;
+	error?: string;
+}
+
+export const Select: React.FC<SelectProps> = ({
 	label,
 	name,
 	options,
-	className,
-}: { label: string; name: string; options: string[]; className?: string }) {
+	value,
+	onChange,
+	className = "",
+	error,
+}) => {
 	return (
-		<>
-			<label htmlFor={name}>{label}</label>
-			<Field as={name} id={name} name={name} className={className}>
+		<div className="mb-4">
+			<label htmlFor={name} className="block text-sm font-medium text-gray-700">
+				{label}
+			</label>
+			<select
+				name={name}
+				id={name}
+				value={value}
+				onChange={onChange}
+				className={`mt-1 block w-full shadow-sm border ${
+					error ? "border-red-500" : "border-gray-300"
+				} rounded-md focus:ring-indigo-500 focus:border-indigo-500 ${className}`}
+				aria-describedby={`${name}-error`}
+				aria-invalid={!!error}
+			>
 				{options.map((option) => (
 					<option key={option} value={option}>
 						{option}
 					</option>
 				))}
-			</Field>
-			<ErrorMessage name={name} component="div" />
-		</>
+			</select>
+			{error && (
+				<p id={`${name}-error`} className="mt-2 text-sm text-red-600">
+					{error}
+				</p>
+			)}
+		</div>
 	);
-}
+};

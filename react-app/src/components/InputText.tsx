@@ -1,28 +1,44 @@
-import { ErrorMessage, Field } from "formik";
-import type React from "react";
+import React, { ChangeEvent } from "react";
 
-export function InputText({
-	label,
-	name,
-	onChange,
-	className,
-}: {
+interface InputTextProps {
 	label: string;
 	name: string;
-	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	value: string | number;
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 	className?: string;
-}) {
+	error?: string;
+}
+
+export const InputText: React.FC<InputTextProps> = ({
+	label,
+	name,
+	value,
+	onChange,
+	className = "",
+	error,
+}) => {
 	return (
-		<div>
-			<label htmlFor={name}>{label}</label>
-			<Field
+		<div className="mb-4">
+			<label htmlFor={name} className="block text-sm font-medium text-gray-700">
+				{label}
+			</label>
+			<input
 				type="text"
-				id={name}
 				name={name}
+				id={name}
+				value={value}
 				onChange={onChange}
-				className={className}
+				className={`mt-1 block w-full shadow-sm border ${
+					error ? "border-red-500" : "border-gray-300"
+				} rounded-md focus:ring-indigo-500 focus:border-indigo-500 ${className}`}
+				aria-describedby={`${name}-error`}
+				aria-invalid={!!error}
 			/>
-			<ErrorMessage name={name} component="div" />
+			{error && (
+				<p id={`${name}-error`} className="mt-2 text-sm text-red-600">
+					{error}
+				</p>
+			)}
 		</div>
 	);
-}
+};
